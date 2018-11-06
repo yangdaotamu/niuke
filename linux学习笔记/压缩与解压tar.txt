@@ -1,0 +1,38 @@
+打包：将一大堆文件或目录变成一个总的文件【tar命令】
+压缩：将一个大的文件通过一些压缩算法变成一个小文件【gzip，bzip2等】
+Linux中很多压缩程序只能针对一个文件进行压缩，这样当你想要压缩一大堆文件时，你得将这一大堆文件先打
+成一个包（tar命令），然后再用压缩程序进行压缩（gzip bzip2命令）。
+
+主选项5个
+-c: 建立压缩档案
+-x：解压
+-t：查看内容
+-r：向压缩归档文件末尾追加文件
+-u：更新原压缩包中的文件
+这五个是独立的命令，压缩解压都要用到其中一个，可以和别的命令连用但只能用其中一个
+
+辅助命令：
+-z:是否同时具有gzip的属性？即是否需要用gzip压缩或解压？一般格式为xxx.tar.gz或xx.tgz
+-j：是否同时具有bzip2的属性？即是否需要用bzip2压缩或解压？一般格式为xx.tar.bz2
+-v:显示操作过程！这个参数很常用
+
+# tar -cf all.tar *.jpg
+这条命令是将所有.jpg的文件打成一个名为all.tar的包。-c是表示产生新的包，-f指定包的文件名。
+# tar -rf all.tar *.gif
+这条命令是将所有.gif的文件增加到all.tar的包里面去。-r是表示增加文件的意思。
+# tar -uf all.tar logo.gif
+这条命令是更新原来tar包all.tar中logo.gif文件，-u是表示更新文件的意思。
+# tar -tf all.tar
+这条命令是列出all.tar包中所有文件，-t是列出文件的意思
+# tar -xf all.tar
+这条命令是解出all.tar包中所有文件，-t是解开的意思
+
+tar调用gzip：打包并进行gzip压缩：
+tar -czvf all.tar.gz *.jpg
+tar -xzvf all.tar.gz
+
+tar调用bz2：打包并进行bz2压缩：
+tar -cjvf all.tar.bz2 *.jpg
+tar -xjvf all.tar.bz2
+
+将压缩包解压到指定文件夹：tar xf all.tar -C /lstudy/test
